@@ -1,67 +1,82 @@
 import random
+Customer_Details = {}
+Account_Details={}
+intial_balance = 1000
 
-create_customer={}
-
-intial_balance=1000
 
 def login(): 
-    correct_admin_name="Thanu"
-    correct_admin_password="123456"
-    # def register():
-    # Name=input("Enter Name:")
-    # Adderss=input("Enter Adderss:")
-    # username=input("Enter user Name:")
-    # usser_Password=input("Enter passowrd:")   
+    correct_admin_name="Admin"
+    correct_admin_password="Admin@123"
+    
 
     while True:
         admin_name=input("Enter Name:")
         admin_password=input("Enter Password:")
         
-        if correct_admin_name==admin_name and correct_admin_password==admin_password:
-            # if Name==admin_name and user_passowrd==admin_password:
+        if correct_admin_name == admin_name and correct_admin_password == admin_password:
             print("login successful!")
-            return admin()
+            admin()
+            print()
                     
         else:
             print("Try agin")
-#  def login_menu():
 
-#     while True:
-#         print("======")             
 
+print("****************************************************************")
+
+
+# def create_customer():
+#     while True :
+#         Customer_Name=input("Enter customer Name:")
+#         customer_password=input("Enter customer password:")
+#         customer_NIC=input("Enter customer NIC:")
+#         customer_ID = random.randint(1001,1010)
+
+#         print(f"Your customer id is :", customer_ID)
+
+#         Customer_Details = { "Name":Customer_Name,
+#                             "Password":customer_password,
+#                             "NIC":customer_NIC,
+                            
+#                             }
+
+
+#         with open("Customer_Details.txt",'a') as bank_01:
+#             bank_01.write(f"{Customer_Name} \t {customer_password} \t {customer_NIC} \t {customer_ID}  \n")
+
+#         return admin()
 
 
 def create_customer():
-    customer_Name="Kannan"
-    customer_password="123456"
-    customer_NIC="123654v"
-    customer_ID=str(random.randint(1001,1010))
- 
-    while True :
-        
-        print("customer_ID:",customer_ID)
-        Customer_Name=input("Enter customer Name:")
-        customer_password=input("Enter customer password:")
-        customer_NIC=input("Enter customer NIC:")
-        
-        if customer_Name== Customer_Name and customer_password==customer_password and customer_NIC==customer_NIC:
-            print("Wel come Customer")
+    while True:
+        Customer_Name = input("Enter customer Name:")
+        customer_password = input("Enter customer password:")
+        customer_NIC = input("Enter customer NIC:")
+        customer_ID = random.randint(1001, 1010)
 
-            print("*****************************")
-            return admin()
+        print(f"Your customer id is: {customer_ID}")
+        
+        Customer_Details = {
+            "Name": Customer_Name,
+            "Password": customer_password,
+            "NIC": customer_NIC,
+            "ID": customer_ID
+        }
+
+        with open("Customer_Details.txt", 'a') as bank_01:
+            bank_01.write(f"{Customer_Name} \t {customer_password} \t {customer_NIC} \t {customer_ID}  \n")
+
+        # Return to admin() function or continue
+        return admin()
+
             
-        else:
-            print("Sorry  your input invalid")
-
-with open("customer.txt",'w') as bank_01:
-    bank_01.write("Name \t adderss \t  ")
-       
 def admin():
 
     while True:
         print("=========ADMIN_MENU=========")
         print("1.create_customer")
         print("2.EXIT")
+
         choice=input("ENTER YOUR CHOICE : ")
 
         if choice=="1":
@@ -76,62 +91,118 @@ def admin():
 
 
 def create_account():
-    global intial_balance
-    acc_no=1001
-    acc_password="123456"
-    holder_name="Kannan"
+   
     
     while True:
-        Acc_No=int(input("Enter your account number : "))
-        AccPassword=(input("Enter your password :  "))
+        
         Holder_Name=str(input("Enter your Name : "))
-        
-        if acc_no==Acc_No and acc_password==AccPassword and holder_name==Holder_Name:
-            print("Wel come ")
+        acc_Password=(input("Enter your password :  "))
+        user_NIC=int(input("Enter your NIC number :"))
+        Acc_No=random.randint(1111111111,9999999999999)
 
-            print("**********************************")
+        # Account_Details={"Name" : Holder_Name,
+        #                  "Password" :acc_Password,
+        #                   "NIC" : user_NIC 
+        #                   }
 
+        if Holder_Name == Customer_Details["Name"] :
+       
+            with open("acc_Details.txt",'a') as bank_01:
+                        bank_01.write(f"{ Holder_Name} \t { acc_Password} \t {user_NIC} \t { Acc_No}  \n")
             return  bank_menu()
-        
 
+    
+
+
+           
+       
+        
+def  show_balance():
+    global intial_balance
+    print(f"Your balance is $ :{intial_balance}")
+
+    print("*****************************")
             
-   
+def deposit_Money():
+    global intial_balance
+    Amount = int(input("Enter Your Ammount :"))
+
+    if Amount > 0:
+        intial_balance += Amount
+        
+        print(f"Your Deposit Money $ :{intial_balance}")
+        # return Amount
+
+        
+       # return 0
+    else:
+        print("That is not valid ")
+
+def Withdraw_Money():
+    global intial_balance
+    Amount=int(input("Enter your Amount :"))
+
+    if Amount<intial_balance:
+        intial_balance -= Amount 
+                
+        print(f"Your Withdraw money $ :{intial_balance:}")
+    else:
+        print("That's not vailid Ammount ")
+
+
+def check_balance():
+    print(f"Your balance is $ :")
+
+
+
+def Transaction_History():
+    pass
+#    import datetime
+
+# x = datetime.datetime.now()
+
+# print(x)
+
+        
           
             
 def bank_menu():
     
     while True:
+        print()
         print("=====BANK MENU======")
         print("1.create account")
-        print("2.Deposit Money")
-        print("3.Withdraw Money")
-        print("4.Check Blance")
-        print("5.Transaction History")
-        print("6.Exit")
+        print("2.show intial_balance")
+        print("3.Deposit Money")
+        print("4.Withdraw Money")
+        print("5.Check Blance")
+        print("6.Transaction History")
+        print("7.Exit")
         choice=input("enter your choice(1-6):")
         
         if choice =="1":
             create_account() 
             
         elif choice=="2":
-            Deposit_Money()          
+            show_balance()         
 
         elif choice=="3":
-            pass          
+            deposit_Money()
+                  
         elif choice=="4":
-            pass           
+           Withdraw_Money()  
+
         elif choice=="5":
-            break     
+            print(f"Your balance is $ :{intial_balance}")
+    
+
         elif choice=="6":
-            print("********* Thank you***********")
-
-def deposit_Money():
-    deposit+=intial_balance
-    print("deposit")
-
+           Transaction_History()
+           
+        else:
+            print("Thank you for banking With use")
 
                     
 
 login()
-# register()
-# bank_menu()
+
