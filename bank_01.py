@@ -1,8 +1,8 @@
 import random
 import os
 
-intial_balance = 1000
-
+intial_balance = 0
+Acc_No = random.randint(1000000000, 9999999999)  
 
 def login(): 
     correct_admin_name="Admin"
@@ -102,7 +102,7 @@ def get_create_account():
     acc_Password = input("Enter your acc_Password: ")
     user_NIC = int(input("Enter your NIC number: "))
     Tele_phone = int(input("Enter your TELE_Number: "))
-    Acc_No = random.randint(1000000000, 9999999999)  
+    
     
     return [Holder_Name, acc_Password, user_NIC, Tele_phone, Acc_No]
 
@@ -131,7 +131,7 @@ def deposit_Money():
         print("your deposited sacussfully")
 
         with open("transaction_history.txt", "a") as transaction_file :
-            transaction_file.write({Acc_No}, {Amount})
+            transaction_file.write( f"\nAcc_No is: {Acc_No} \n Deposit Amount is: {Amount}\n ")
     
     else:
         print("That is not valid ")
